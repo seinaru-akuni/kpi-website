@@ -1,0 +1,154 @@
+body {
+    background-color: rgb(246, 246, 255);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+header{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border: 0;  
+    text-align: center;
+    text-align: justify; /* Допомагає рознести елементи */
+    white-space: nowrap; /* Забороняє перенос на новий рядок */
+}
+
+
+.logo{
+    width: auto;
+    height: auto;
+    color: rgb(92, 43, 226);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+#desktop-menu nav h4{
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+}
+
+#desktop-menu nav svg{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header nav ul li{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+header nav ul li a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}   
+#header-container::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+#mobile-main-2-content{
+    display: none;
+}
+#burger {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1310px) {
+    #desktop-menu {
+        display: none;
+    }
+    
+    #burger {
+        display: block;
+        float: right;
+        padding-top: 15px;
+    }
+
+    #mobile-main-2-content{
+        display: block;
+    }
+    #desktop-main-2-content{
+        display: none;
+    }
+
+}
+
+
+
+#burger #burger-dropdown {
+    display: block;
+    opacity: 1;
+    position: absolute; 
+    right: 0;
+    height: auto;
+    top:100%;
+    width: 50%;
+
+
+    transform: translateY(-100%);
+
+    pointer-events: none;
+    transition: transform 0.3s ease;
+        
+    z-index: -1;
+}
+
+
+#burger.active #burger-dropdown {
+
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: transform 0.3s ease;
+    opacity: 1;
+    z-index: 1;
+}
+
+#burger #burger-dropdown .main-tabs{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+    border-radius: 18px;
+    border-color:rgb(192, 192, 192);
+}
+#burger #burger-dropdown .main-tabs a{
+    align-items: center;
+    display: flex;
+    justify-content: left;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
+    border-color:rgb(192, 192, 192);
+}
+
+#burger #burger-dropdown .login-tabs{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+    border-radius: 18px;
+    border-color:rgb(192, 192, 192);
+}
+#burger #burger-dropdown .login-tabs a{
+    align-items: center;
+    display: flex;
+    justify-content: left;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-color:rgb(192, 192, 192);
+}
+
+
