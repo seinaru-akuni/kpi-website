@@ -1,0 +1,42 @@
+<main class="flex-container-column mg-2 clmp-xmg-2">
+    <h2>Ваш Дашборд</h2>
+    
+    <div class="flex-container-row flex-space-between al-items-stretch" style="gap: 20px; flex-wrap: wrap;">
+        <div class="bgc-white br-radius-24px pg-2 br-1 brc-0 flex-2">
+            <h3>Останні події</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>16 Травня 2026:</strong> Писав висновки про збіжність Хука-Дживса та фільтри обмежень.</li>
+                <li><strong>15 Травня 2026:</strong> Статистичний аналіз 10 альбомів (bootstrap). Дані виглядають репрезентативно.</li>
+                <li><strong>14 Травня 2026:</strong> Налаштував $lookup агрегації в MongoDB.</li>
+            </ul>
+        </div>
+
+        <div class="bgc-white br-radius-24px pg-2 br-1 brc-0 flex-1">
+            <h3>Цілі на тиждень</h3>
+            <ol style="line-height: 1.8;">
+                <li>Перевірити формулу обчислення x* для методу ДСК-Пауелла.</li>
+                <li>Виправити накладання підписів на графіках траєкторій.</li>
+                <li>Додати оцінку дисперсії.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="bgc-white br-radius-24px pg-2 br-1 brc-0 tmg-2 flex-container-column x-center y-center">
+        <h3>Швидка оцінка стану</h3>
+        <p>Натисніть на відповідну зону зображення, щоб швидко створити запис із заданим настроєм.</p>
+        
+        <img src="https://via.placeholder.com/600x150/f6f6ff/5c2be2?text=ЖАХЛИВО+|+ПОГАНО+|+НОРМАЛЬНО+|+ДОБРЕ+|+ВІДМІННО" 
+             alt="Шкала настрою" 
+             usemap="#moodmap" 
+             class="br-radius-16px" 
+             style="max-width: 100%; border: 1px solid rgb(192,192,192);">
+             
+        <map name="moodmap">
+            <area shape="rect" coords="0,0,120,150" href="new_entry.html?mood=1" alt="Жахливо">
+            <area shape="rect" coords="120,0,240,150" href="new_entry.html?mood=2" alt="Погано">
+            <area shape="rect" coords="240,0,360,150" href="new_entry.html?mood=3" alt="Нормально">
+            <area shape="rect" coords="360,0,480,150" href="new_entry.html?mood=4" alt="Добре">
+            <area shape="rect" coords="480,0,600,150" href="new_entry.html?mood=5" alt="Відмінно">
+        </map>
+    </div>
+</main>
