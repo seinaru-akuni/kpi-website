@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">    
     <head>
@@ -124,21 +121,28 @@
 
 
         <main class="flex-container-column x-center y-center mg-2">
-            <div class="bgc-white br-radius-24px pg-2 br-1 brc-0" style="width: 100%; max-width: 400px;">
-                <h2 class="text-al-center ymg-16px">Створити акаунт</h2>
+            <div class="bgc-white br-radius-24px pg-2 br-1 brc-0" style="width: 100%; max-width: 400px; box-sizing: border-box;">
+                <h2 class="text-al-center ymg-16px">Вхід у MindFlow</h2>
                 
-                <form action="dashboard.html" method="GET" class="flex-container-column" aria-label="Форма реєстрації">
-                    <label for="reg-login" class="ymg-8px">Логін:</label>
-                    <input type="text" id="reg-login" name="login" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
+                <form action="dashboard.html" method="GET" class="flex-container-column" aria-label="Форма входу до особистого кабінету">
+                    
+                    <label for="login-email" class="ymg-8px"><b>Електронна пошта або логін:</b></label>
+                    <input type="text" id="login-email" name="username" class="pg-8px br-1 brc-0 br-radius-16px" placeholder="example@domain.com" required aria-required="true">
 
-                    <label for="reg-email" class="ymg-8px tmg-16px">Електронна пошта:</label>
-                    <input type="email" id="reg-email" name="email" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
+                    <label for="login-password" class="ymg-8px tmg-16px"><b>Пароль:</b></label>
+                    <input type="password" id="login-password" name="password" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
 
-                    <label for="reg-password" class="ymg-8px tmg-16px">Пароль:</label>
-                    <input type="password" id="reg-password" name="password" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
+                    <div class="flex-container-row y-center tmg-16px">
+                        <input type="checkbox" id="remember-me" name="remember" class="rmg-8px" style="width: auto; cursor: pointer;">
+                        <label for="remember-me" style="cursor: pointer; font-size: 0.95rem;">Запам'ятати мене на цьому пристрої</label>
+                    </div>
 
-                    <button type="submit" class="prpl-btn pg-16px br-radius-16px tmg-24px">Зареєструватися</button>
+                    <button type="submit" class="prpl-btn pg-16px br-radius-16px tmg-24px text-al-center">Увійти</button>
                 </form>
+                
+                <p class="text-al-center tmg-16px" style="font-size: 0.9rem;">
+                    Ще немає акаунту? <a href="register.html" class="cl-prpl" style="text-decoration: underline;">Зареєструватися</a>
+                </p>
             </div>
         </main> 
         
