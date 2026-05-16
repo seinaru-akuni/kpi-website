@@ -123,24 +123,55 @@
         </header>
 
 
-        <main class="flex-container-column x-center y-center mg-2">
-            <div class="bgc-white br-radius-24px pg-2 br-1 brc-0" style="width: 100%; max-width: 400px;">
-                <h2 class="text-al-center ymg-16px">Створити акаунт</h2>
-                
-                <form action="dashboard.html" method="GET" class="flex-container-column" aria-label="Форма реєстрації">
-                    <label for="reg-login" class="ymg-8px">Логін:</label>
-                    <input type="text" id="reg-login" name="login" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
+            <main class="flex-container-column x-center y-center mg-2">
+                <div class="bgc-white br-radius-24px pg-2 br-1 brc-0 w100" style="max-width: 800px; box-sizing: border-box;">
+                    <h2 class="ymg-16px text-al-center">Профіль користувача</h2>
 
-                    <label for="reg-email" class="ymg-8px tmg-16px">Електронна пошта:</label>
-                    <input type="email" id="reg-email" name="email" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
+                    <div class="flex-container-row flex-space-between al-items-stretch tmg-16px" style="gap: 30px; flex-wrap: wrap;">
+                        
+                        <div class="flex-1" style="min-width: 280px;">
+                            <div class="text-al-center ymg-16px">
+                                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="cl-prpl bgc-0 br-radius-32px pg-16px" style="border: 1px solid rgb(192, 192, 192);">
+                                    <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+                                </svg>
+                                <h3 class="tmg-8px ymg-0">Студент ПТІ</h3>
+                                <p class="mg-0" style="color: gray; font-size: 0.9rem;">student_pti@kpi.ua</p>
+                            </div>
 
-                    <label for="reg-password" class="ymg-8px tmg-16px">Пароль:</label>
-                    <input type="password" id="reg-password" name="password" class="pg-8px br-1 brc-0 br-radius-16px" required aria-required="true">
+                            <h4 class="tmg-24px bbr-1 brc-0 pg-8px">Статистика активності</h4>
+                            <ul style="line-height: 2; padding-left: 20px; list-style-type: square;" aria-label="Статистичні дані користувача">
+                                <li>Всього створено записів: <span class="cl-prpl"><b>14</b></span></li>
+                                <li>Середня оцінка стану за місяць: <b>4.2 / 5</b></li>
+                                <li>Найбільш часто використовуваний тег: <b>#навчання</b></li>
+                                <li>Активність облікового запису: <b>З травня 2026</b></li>
+                            </ul>
+                        </div>
 
-                    <button type="submit" class="prpl-btn pg-16px br-radius-16px tmg-24px">Зареєструватися</button>
-                </form>
-            </div>
-        </main> 
+                        <div class="flex-1 lbr-1 brc-0 lpg-2" style="min-width: 280px;">
+                            <h4 class="ymg-8px bbr-1 brc-0 pg-8px">Налаштування профілю</h4>
+                            
+                            <form action="profile.html" method="POST" class="flex-container-column" aria-label="Форма зміни персональних даних">
+                                
+                                <label for="profile-name" class="ymg-8px"><b>Ім'я або нікнейм:</b></label>
+                                <input type="text" id="profile-name" name="display_name" value="Студент ПТІ" class="pg-8px br-1 brc-0 br-radius-16px">
+
+                                <label for="profile-theme" class="ymg-8px tmg-16px"><b>Тема інтерфейсу за замовчуванням:</b></label>
+                                <select id="profile-theme" name="theme" class="pg-8px br-1 brc-0 br-radius-16px" style="cursor: pointer;">
+                                    <option value="light" selected>Світла тема (MindFlow Light)</option>
+                                    <option value="dark">Темна тема (Deep Space)</option>
+                                    <option value="indigo">Палітра Індиго</option>
+                                </select>
+
+                                <label for="profile-bio" class="ymg-8px tmg-16px"><b>Короткий статус або цитата:</b></label>
+                                <textarea id="profile-bio" name="bio" rows="4" class="pg-8px br-1 brc-0 br-radius-16px" placeholder="Запишіть сюди життєве кредо або девіз..."></textarea>
+
+                                <button type="submit" class="prpl-btn pg-12px br-radius-16px tmg-24px">Зберегти налаштування</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </main> 
         
         <script src="scripts/burger.js" defer></script>
     </body>
