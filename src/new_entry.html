@@ -1,0 +1,27 @@
+<main class="flex-container-column x-center y-center mg-2">
+    <div class="bgc-white br-radius-24px pg-2 br-1 brc-0 w100" style="max-width: 600px;">
+        <h2 class="text-al-center ymg-16px">Створити новий запис</h2>
+        
+        <form action="dashboard.html" method="GET" class="flex-container-column" aria-label="Форма створення запису">
+            <label for="entry-date" class="ymg-8px"><b>Дата:</b></label>
+            <input type="date" id="entry-date" name="date" class="pg-8px br-1 brc-0 br-radius-16px" aria-required="true" required>
+
+            <label for="entry-tags" class="ymg-8px tmg-16px"><b>Теги (через кому):</b></label>
+            <input type="text" id="entry-tags" name="tags" placeholder="Наприклад: #навчання, #ідеї" class="pg-8px br-1 brc-0 br-radius-16px">
+
+            <label for="entry-mood" class="ymg-8px tmg-16px"><b>Оцінка емоційного стану:</b></label>
+            <select id="entry-mood" name="mood" class="pg-8px br-1 brc-0 br-radius-16px" aria-required="true">
+                <option value="5">Чудовий (5)</option>
+                <option value="4">Хороший (4)</option>
+                <option value="3" selected>Нормальний (3)</option>
+                <option value="2">Поганий (2)</option>
+                <option value="1">Жахливий (1)</option>
+            </select>
+
+            <label for="entry-text" class="ymg-8px tmg-16px"><b>Ваші думки:</b></label>
+            <textarea id="entry-text" name="content" rows="6" placeholder="Що у вас на думці?" class="pg-8px br-1 brc-0 br-radius-16px" aria-required="true" required></textarea>
+
+            <button type="submit" class="prpl-btn pg-16px br-radius-16px tmg-24px text-al-center">Зберегти запис</button>
+        </form>
+    </div>
+</main>

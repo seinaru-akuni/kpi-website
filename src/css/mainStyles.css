@@ -152,3 +152,35 @@ header nav ul li a {
 }
 
 
+/* Селектор за атрибутом для форм */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+textarea, 
+select {
+    width: 100%;
+    box-sizing: border-box; /* Вирівнювання засобами box model */
+    font-family: inherit;
+    outline: none;
+}
+
+input[type="text"]:focus, 
+textarea:focus {
+    border-color: rgb(92, 43, 226);
+}
+
+/* Стилі для таблиці аналітики (вимога: таблична верстка) */
+table.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.analytics-table th, 
+table.analytics-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgb(192, 192, 192);
+}
+
+table.analytics-table th {
+    background-color: rgb(246, 246, 255);
+}
