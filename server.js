@@ -85,6 +85,48 @@ app.get('/api/theme', (req, res) => {
     res.json({ theme: theme });
 });
 
+// 5. Ендпоїнт створення нового запису (POST-запит для Дашборду)
+app.post('/api/entries', (req, res) => {
+    const username = req.cookies.username;
+
+    if (!username) {
+        return res.status(401).json({ error: "Ви не авторизовані." });
+    }
+
+    const { date, mood, tags, content } = req.body;
+    const allEntries = readData(entriesFile);
+
+    // Створюємо новий об'єкт запису
+    const newEntry = {
+        id: Date.now(), // унікальний ID
+        user: username,
+        date,
+        mood,
+        tags,
+        content
+    };
+
+    allEntries.push(newEntry);
+    writeData(entriesFile, allEntries);
+
+    res.status(201).json({ message: "Запис успішно додано!", entry: newEntry });
+});
+
+// 6. Ендпоїнт перевірки статусу (чи залогінений користувач)
+app.get('/api/me', (req, res) => {
+    const username = req.cookies.username;
+    if (username) {
+        res.json({ loggedIn: true, username: username });
+    } else {
+        res.json({ loggedIn: false });
+    }
+});
+
+// 7. Ендпоїнт для правильного виходу з акаунту
+app.post('/api/logout', (req, res) => {
+    res.clearCookie('username'); // Видаляємо кукі
+    res.json({ message: "Вийшли успішно" });
+});
 
 // === ЗАПУСК СЕРВЕРА ===
 app.listen(PORT, () => {

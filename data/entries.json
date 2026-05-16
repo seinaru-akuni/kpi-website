@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1778955583544,
+    "user": "test",
+    "date": "2026-05-16",
+    "mood": "2",
+    "tags": "#навчання, ідеї",
+    "content": "dfgxcghkghjgf"
+  },
+  {
+    "id": 1778955609172,
+    "user": "test",
+    "date": "2026-05-16",
+    "mood": "3",
+    "tags": "#ідеї",
+    "content": "xgnfgbdfgb"
+  }
+]
