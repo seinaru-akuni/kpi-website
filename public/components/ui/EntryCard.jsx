@@ -1,5 +1,5 @@
 const EntryCard = ({ entry }) => {
-    // 1. Функція тепер приймає конкретно цифру настрою (mood)
+    // 1. Функція приймає конкретно цифру настрою (mood)
     const getMoodStyle = (mood) => {
         switch(Number(mood)) {
             case 1:
@@ -17,7 +17,6 @@ const EntryCard = ({ entry }) => {
         }
     };
 
-    // 2. Викликаємо функцію один раз і зберігаємо результат
     const moodStyle = getMoodStyle(entry.mood);
 
     return (
@@ -25,7 +24,6 @@ const EntryCard = ({ entry }) => {
             <div className="flex-container-row flex-space-between y-center flex-wrap">
                 <h3 className="mg-0">{entry.date}</h3>
                 
-                {/* 3. Правильно підставляємо змінні у стилі (без зайвих дужок) */}
                 <span className="pg-8px br-radius-16px" style={{ backgroundColor: moodStyle.bgc, color: moodStyle.color, fontWeight: 'bold', fontSize: '0.9rem' }}>
                     Оцінка стану: {entry.mood}/5
                 </span>
