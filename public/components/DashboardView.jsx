@@ -96,6 +96,10 @@ const DashboardApp = () => {
                 {currentView === 'analytics' && (
                     <AnalyticsView entries={entries} />
                 )}
+
+                {currentView === 'profile' && (
+                    <ProfileView username={username} />
+                )}
             </main>
         </div>
     );

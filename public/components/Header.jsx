@@ -12,26 +12,7 @@ const Header = ({ currentView, navigateTo, username, handleLogout }) => {
     return (
         <React.Fragment>
             <style>{`
-                .desktop-flex-layout {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    flex-grow: 1;
-                    margin-left: 30px;
-                }
                 
-                /* Фон та відступи для мобільного меню */
-                #burger-dropdown .main-tabs,
-                #burger-dropdown .login-tabs {
-                    background-color: white;
-                }
-                #burger-dropdown .main-tabs a h4 {
-                    margin: 0;
-                    margin-left: 10px;
-                }
-                #burger-dropdown .main-tabs a svg {
-                    margin-left: 15px;
-                }
             `}</style>
 
             <header className="container-fluid bbr-1 brc-0 bgc-white" style={{height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 15px', position: 'relative'}}>
@@ -87,7 +68,7 @@ const Header = ({ currentView, navigateTo, username, handleLogout }) => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a className="inline-block" href="profile.html" style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
+                                    <a className={`inline-block ${currentView === 'profile' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'profile')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
                                         <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                         </svg>
@@ -156,7 +137,9 @@ const Header = ({ currentView, navigateTo, username, handleLogout }) => {
                                         </svg>
                                         <h4 className="lmg-8px ymg-0">Аналітика</h4>
                                     </a>
-                                    <a href="profile.html" style={{color: 'inherit'}}>
+                                    <a href="#" 
+                                        onClick={(e) => handleNavClick(e, 'profile')} 
+                                        style={{color: currentView === 'profile' ? '#6200ee' : 'inherit'}}>
                                         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                         </svg>
