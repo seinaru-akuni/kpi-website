@@ -1,4 +1,4 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 
 // --- КОМПОНЕНТИ ПОГОДИ (без змін) ---
 const WeatherCard = ({ day }) => (
@@ -119,9 +119,31 @@ const WeatherWidget = () => {
     );
 };
 
+// --- МАСИВ З ВІДЕО ---
+const mentalHealthVideos = [
+    { id: 'seHFkh8-6NA', title: 'Що дає щоденник емоцій? Як його вести?' },
+    { id: '0fM6KCIXjQw', title: 'Медитація для зняття стресу та тривоги' },
+    { id: 'AWreNlX1DUU', title: 'Емоційне вигорання: як горіти та не згорати' },
+    { id: 'A1vhn0SNMy8', title: 'Емоційне вигорання. Що це й як уникнути?' },
+    { id: '0UmwHqss-A8', title: 'Щоденник емоцій: допоможе краще себе зрозуміти' },
+    { id: 'oNmYD5iFlEw', title: 'Як вийти зі стану вигорання: поради експертки' },
+    { id: 'efpvf2F4R-4', title: 'Як зрозуміти, що в тебе вигорання? Симптоми' },
+    { id: '3TLrdJzRBXA', title: 'Що таке емоційне вигорання й як його подолати' },
+    { id: 'VYwv_8OaFJE', title: 'Як знайти гармонію та внутрішній спокій' }
+];
+
 // --- ГОЛОВНИЙ КОМПОНЕНТ HOME VIEW ---
 const HomeView = ({ onNavigate }) => {
     
+    // Стан для зберігання 3 випадкових відео
+    const [randomVideos, setRandomVideos] = useState([]);
+
+    // Випадковий вибір відео при завантаженні
+    useEffect(() => {
+        const shuffled = [...mentalHealthVideos].sort(() => 0.5 - Math.random());
+        setRandomVideos(shuffled.slice(0, 3));
+    }, []);
+
     // Спільний стиль для карток
     const baseCardStyle = {
         width: '100%',
@@ -161,8 +183,8 @@ const HomeView = ({ onNavigate }) => {
             `}</style>
 
             <div className="container-fluid flex-container-column x-center y-center text-al-center">
-                <h1>ЗБЕРІГАЙ СВОЇ ДУМКИ</h1>
-                <h1>АНАЛІЗУЙ СВІЙ СТАН</h1>
+                <h1 style = {{marginTop: '75px'}}>ЗБЕРІГАЙТЕ СВОЇ ДУМКИ</h1>
+                <h1 style = {{marginBottom: '75px'}}>АНАЛІЗУЙТЕ СВІЙ СТАН</h1>
                 <h3>MindFlow — це ваш особистий простір для ведення записів, відстеження емоційного стану та пошуку гармонії з собою.</h3>
                 <div className="flex-container-row clmp-xmg" style={{gap: '15px'}}>
                     <button onClick={() => onNavigate('new')} className="btn ypg-8px clmp-xpg-2 prpl-btn br-radius-16px">Створити запис</button>
@@ -191,32 +213,28 @@ const HomeView = ({ onNavigate }) => {
                     </div>
                 </div>
 
-                {/* Віджет погоди */}
+                {/* Віджет погоди (Розділяє текст і відео) */}
                 <div className="w100 flex-container-column x-center y-center ymg-2">
                     <WeatherWidget />
                 </div>
 
-                {/* === РЯД 2: ВІДЕО КАРТКИ === */}
+                {/* === ЗАГОЛОВОК ДЛЯ ВІДЕО === */}
+                <div className="w100 text-al-center" style={{marginTop: '16px', marginBottom: '8px'}}>
+                    <h2 className="mg-0">Цікаве до перегляду</h2>
+                    <p style={{color: 'gray', marginTop: '8px'}}>Випадкова добірка корисних матеріалів для вашого ментального здоров'я</p>
+                </div>
+
+                {/* === РЯД 2: ВІДЕО КАРТКИ (ДИНАМІЧНІ) === */}
                 <div className="responsive-grid">
-                    <a href="https://www.youtube.com/live/VYwv_8OaFJE?si=08_nRxEFue7tfW86" target="_blank" rel="noopener noreferrer" className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={videoLinkStyle} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                        <img src="https://img.youtube.com/vi/VYwv_8OaFJE/hqdefault.jpg" alt="Щоденник емоцій" className="br-radius-16px" style={{width: '100%', height: 'auto', aspectRatio: '16/9', objectFit: 'cover'}} />
-                        <h4 className="tmg-8px cl-prpl text-al-center" style={{margin: '12px 0 0 0'}}>Як правильно вести щоденник</h4>
-                    </a>
-
-                    <a href="https://www.youtube.com/live/VYwv_8OaFJE?si=08_nRxEFue7tfW86" target="_blank" rel="noopener noreferrer" className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={videoLinkStyle} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                        <img src="https://img.youtube.com/vi/VYwv_8OaFJE/hqdefault.jpg" alt="Аналіз стану" className="br-radius-16px" style={{width: '100%', height: 'auto', aspectRatio: '16/9', objectFit: 'cover'}} />
-                        <h4 className="tmg-8px cl-prpl text-al-center" style={{margin: '12px 0 0 0'}}>Що таке емоційне вигорання?</h4>
-                    </a>
-
-                    <a href="https://www.youtube.com/live/VYwv_8OaFJE?si=08_nRxEFue7tfW86" target="_blank" rel="noopener noreferrer" className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={videoLinkStyle} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                        <img src="https://img.youtube.com/vi/VYwv_8OaFJE/hqdefault.jpg" alt="Гармонія" className="br-radius-16px" style={{width: '100%', height: 'auto', aspectRatio: '16/9', objectFit: 'cover'}} />
-                        <h4 className="tmg-8px cl-prpl text-al-center" style={{margin: '12px 0 0 0'}}>Медитація для початківців</h4>
-                    </a>
+                    {randomVideos.map((video, index) => (
+                        <a key={index} href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={videoLinkStyle} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                            <img src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} alt={video.title} className="br-radius-16px" style={{width: '100%', height: 'auto', aspectRatio: '16/9', objectFit: 'cover'}} />
+                            <h4 className="tmg-8px cl-prpl text-al-center" style={{margin: '12px 0 0 0'}}>{video.title}</h4>
+                        </a>
+                    ))}
                 </div>
 
             </div>
-
-            
         </React.Fragment>
     );
 };
