@@ -80,8 +80,8 @@ const Header = ({ currentView, navigateTo, username, handleLogout, isLoggedIn })
                         {isLoggedIn ? (
                             <div id="auth-desktop" style={{display: 'flex', alignItems: 'center', flexShrink: 0, marginLeft: '20px', whiteSpace: 'nowrap'}}>
                                 <span style={{color: 'gray', marginRight: '15px'}}>Вітаємо, <b>{username}</b>!</span>
-                                <button onClick={handleLogout} className="btn ypg-8px clmp-xpg-2 xmg-8px white-btn br-radius-16px" style={{color: '#c62828', border: '1px solid #c62828', cursor: 'pointer', whiteSpace: 'nowrap'}}>
-                                    Вихід
+                                <button onClick={handleLogout} className="red-transparent-btn ypg-8px clmp-xpg-2 xmg-8px bgc-white br-radius-16px">
+                                    <b>Вихід</b>
                                 </button>
                             </div>
                         ) : (
@@ -94,7 +94,7 @@ const Header = ({ currentView, navigateTo, username, handleLogout, isLoggedIn })
                     </div>
 
                     {/* === ОБГОРТКА ДЛЯ БУРГЕРА (Для мобільних пристроїв) === */}
-                    <div className="flex-container-row y-center" style={{ marginLeft: 'auto', height: '100%' }}>
+                    <div className="flex-container-row y-center" style={{ marginRight: '10px' ,marginLeft: 'auto', height: '100%' }}>
                         <div id="burger" 
                                 className={isBurgerOpen ? 'active' : ''} 
                                 onClick={() => setIsBurgerOpen(!isBurgerOpen)}
@@ -160,8 +160,8 @@ const Header = ({ currentView, navigateTo, username, handleLogout, isLoggedIn })
                                     {isLoggedIn ? (
                                         <div className="pg-16px flex-container-column y-center gap-10px" style={{gap: '10px'}}>
                                             <span style={{color: 'gray'}}>Вітаємо, <b className="white-space-nowrap">{username}</b>!</span>
-                                            <button onClick={handleLogout} className="w100 prpl-btn ypg-8px br-radius-16px">
-                                                Вихід
+                                            <button onClick={handleLogout} className="w100 red-transparent-btn bgc-white ypg-8px br-radius-16px">
+                                                <b>Вихід</b>
                                             </button>
                                         </div>
                                     ) : (

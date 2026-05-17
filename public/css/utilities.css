@@ -157,6 +157,12 @@
     border: 1px solid rgb(92, 43, 226);
 }
 
+.red-transparent-btn{
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border: 1px solid rgb(240, 36, 0);
+}
+
 .white-btn{
     background-color: white;
     color: black;
@@ -188,6 +194,12 @@
     transition: 0.3s;
     background-color: white;
     color:black;
+}
+
+.red-transparent-btn:hover{
+    transition: 0.3s;
+    background-color: rgb(240, 36, 0);
+    color:white;
 }
 
 .white-btn:hover{
