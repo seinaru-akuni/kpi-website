@@ -1,6 +1,6 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 
-// --- КОМПОНЕНТИ ПОГОДИ (перенесені з index.html) ---
+// --- КОМПОНЕНТИ ПОГОДИ (без змін) ---
 const WeatherCard = ({ day }) => (
     <div className="bgc-0 br-radius-16px pg-16px br-1 brc-0 flex-container-column x-center y-center" style={{minWidth: '130px'}}>
         <p className="mg-0" style={{textTransform: 'capitalize'}}><b>{day.date}</b></p>
@@ -119,40 +119,121 @@ const WeatherWidget = () => {
     );
 };
 
+// --- МАСИВ З ВІДЕО ---
+const mentalHealthVideos = [
+    { id: 'seHFkh8-6NA', title: 'Що дає щоденник емоцій? Як його вести?' },
+    { id: '0fM6KCIXjQw', title: 'Медитація для зняття стресу та тривоги' },
+    { id: 'AWreNlX1DUU', title: 'Емоційне вигорання: як горіти та не згорати' },
+    { id: 'A1vhn0SNMy8', title: 'Емоційне вигорання. Що це й як уникнути?' },
+    { id: '0UmwHqss-A8', title: 'Щоденник емоцій: допоможе краще себе зрозуміти' },
+    { id: 'oNmYD5iFlEw', title: 'Як вийти зі стану вигорання: поради експертки' },
+    { id: 'efpvf2F4R-4', title: 'Як зрозуміти, що в тебе вигорання? Симптоми' },
+    { id: '3TLrdJzRBXA', title: 'Що таке емоційне вигорання й як його подолати' },
+    { id: 'VYwv_8OaFJE', title: 'Як знайти гармонію та внутрішній спокій' }
+];
+
 // --- ГОЛОВНИЙ КОМПОНЕНТ HOME VIEW ---
 const HomeView = ({ onNavigate }) => {
+    
+    // Стан для зберігання 3 випадкових відео
+    const [randomVideos, setRandomVideos] = useState([]);
+
+    // Випадковий вибір відео при завантаженні
+    useEffect(() => {
+        const shuffled = [...mentalHealthVideos].sort(() => 0.5 - Math.random());
+        setRandomVideos(shuffled.slice(0, 3));
+    }, []);
+
+    // Спільний стиль для карток
+    const baseCardStyle = {
+        width: '100%',
+        maxWidth: '400px',
+        boxSizing: 'border-box'
+    };
+
+    // Стиль для відео з ефектом наведення
+    const videoLinkStyle = {
+        ...baseCardStyle,
+        textDecoration: 'none', 
+        transition: 'transform 0.2s ease-in-out',
+        cursor: 'pointer'
+    };
+
     return (
         <React.Fragment>
+            
+            {/* Додаємо CSS прямо в компонент для контролю поведінки під час появи бургера */}
+            <style>{`
+                .responsive-grid {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    gap: 24px;
+                    width: 100%;
+                    max-width: 1200px;
+                }
+                
+                /* 1100px - це точка, коли у вас з'являється меню-бургер згідно mainStyles.css */
+                @media (max-width: 1100px) {
+                    .responsive-grid {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                }
+            `}</style>
+
             <div className="container-fluid flex-container-column x-center y-center text-al-center">
-                <h1>ЗБЕРІГАЙ СВОЇ ДУМКИ</h1>
-                <h1>АНАЛІЗУЙ СВІЙ СТАН</h1>
+                <h1 style = {{marginTop: '75px'}}>ЗБЕРІГАЙТЕ СВОЇ ДУМКИ</h1>
+                <h1 style = {{marginBottom: '75px'}}>АНАЛІЗУЙТЕ СВІЙ СТАН</h1>
                 <h3>MindFlow — це ваш особистий простір для ведення записів, відстеження емоційного стану та пошуку гармонії з собою.</h3>
                 <div className="flex-container-row clmp-xmg" style={{gap: '15px'}}>
-                    {/* Кнопки тепер керують навігацією всередині SPA */}
                     <button onClick={() => onNavigate('new')} className="btn ypg-8px clmp-xpg-2 prpl-btn br-radius-16px">Створити запис</button>
                     <button onClick={() => onNavigate('feed')} className="btn ypg-8px clmp-xpg-2 white-btn br-radius-16px">Мої записи</button>
                 </div>
             </div>
-            
-            {/* Блоки з описом */}
-            <div className="flex-container-row mg-2 flex-wrap" id="desktop-main-2-content" style={{gap: '20px'}}>
-                <div className="flex-container-column x-center y-center clmp-xmg-2 bgc-white flex-1 br-radius-24px" style={{minWidth: '250px'}}>
-                    <h2>Особистий щоденник</h2>
-                    <p className="text-al-center">Записуйте свої думки, ідеї та переживання у зручному та безпечному форматі. Додавайте теги для легкої навігації.</p>
-                </div>
-                <div className="flex-container-column x-center y-center clmp-xmg-2 bgc-white flex-1 br-radius-24px" style={{minWidth: '250px'}}>
-                    <h2>Аналізуйте свій стан</h2>
-                    <p className="text-al-center">Використовуйте інструменти аналізу, щоб краще розуміти свої емоції та поведінку. MindFlow допоможе вам виявити патерни.</p>
-                </div>
-                <div className="flex-container-column x-center y-center clmp-xmg-2 bgc-white flex-1 br-radius-24px" style={{minWidth: '250px'}}>
-                    <h2>Знаходьте гармонію</h2>
-                    <p className="text-al-center">Регулярне ведення щоденника допомагає знизити стрес, структурувати думки та знайти внутрішній спокій.</p>
-                </div>
-            </div>
 
-            {/* Віджет погоди */}
-            <div className="w100 flex-container-column x-center y-center ymg-2">
-                <WeatherWidget />
+            {/* Головний контейнер (Колонка), що тримає два ряди з відступом між ними */}
+            <div className="flex-container-column x-center y-center mg-2" style={{gap: '32px', width: '100%', padding: '0 20px', boxSizing: 'border-box'}}>
+                
+                {/* === РЯД 1: ТЕКСТОВІ КАРТКИ === */}
+                <div className="responsive-grid">
+                    <div className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={baseCardStyle}>
+                        <h2 className="text-al-center">Особистий щоденник</h2>
+                        <p className="text-al-center" style={{flexGrow: 1}}>Записуйте свої думки, ідеї та переживання у зручному та безпечному форматі. Додавайте теги для легкої навігації.</p>
+                    </div>
+
+                    <div className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={baseCardStyle}>
+                        <h2 className="text-al-center">Аналізуйте свій стан</h2>
+                        <p className="text-al-center" style={{flexGrow: 1}}>Використовуйте інструменти аналізу, щоб краще розуміти свої емоції та поведінку. MindFlow допоможе вам виявити патерни.</p>
+                    </div>
+
+                    <div className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={baseCardStyle}>
+                        <h2 className="text-al-center">Знаходьте гармонію</h2>
+                        <p className="text-al-center" style={{flexGrow: 1}}>Регулярне ведення щоденника допомагає знизити стрес, структурувати думки та знайти внутрішній спокій.</p>
+                    </div>
+                </div>
+
+                {/* Віджет погоди (Розділяє текст і відео) */}
+                <div className="w100 flex-container-column x-center y-center ymg-2">
+                    <WeatherWidget />
+                </div>
+
+                {/* === ЗАГОЛОВОК ДЛЯ ВІДЕО === */}
+                <div className="w100 text-al-center" style={{marginTop: '16px', marginBottom: '8px'}}>
+                    <h2 className="mg-0">Цікаве до перегляду</h2>
+                    <p style={{color: 'gray', marginTop: '8px'}}>Випадкова добірка корисних матеріалів для вашого ментального здоров'я</p>
+                </div>
+
+                {/* === РЯД 2: ВІДЕО КАРТКИ (ДИНАМІЧНІ) === */}
+                <div className="responsive-grid">
+                    {randomVideos.map((video, index) => (
+                        <a key={index} href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="flex-container-column x-center y-center bgc-white flex-1 br-radius-24px pg-24px br-1 brc-0" style={videoLinkStyle} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                            <img src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} alt={video.title} className="br-radius-16px" style={{width: '100%', height: 'auto', aspectRatio: '16/9', objectFit: 'cover'}} />
+                            <h4 className="tmg-8px cl-prpl text-al-center" style={{margin: '12px 0 0 0'}}>{video.title}</h4>
+                        </a>
+                    ))}
+                </div>
+
             </div>
         </React.Fragment>
     );
