@@ -1,7 +1,9 @@
 const DashboardView = ({ entries, onNavigateToNew }) => {
     
+    // Створюємо копію масиву та сортуємо її за датою (від найновіших до найстаріших)
+    const sortedEntries = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return (
-        
         <div className="w100" style={{maxWidth: '900px', margin: '0 auto'}}>
             <div className="flex-container-row flex-space-between y-center ymg-16px">
                 <h2>Ваші останні записи</h2>
@@ -19,8 +21,8 @@ const DashboardView = ({ entries, onNavigateToNew }) => {
                 </div>
             ) : (
                 <div className="flex-container-column tmg-16px" style={{gap: '16px'}}>
-                    {/* Викликаємо наш новий компонент картки для кожного запису */}
-                    {entries.map(entry => (
+                    {/* Використовуємо наш ВІДСОРТОВАНИЙ за датою масив */}
+                    {sortedEntries.map(entry => (
                         <EntryCard key={entry.id} entry={entry} />
                     ))}
                 </div>
