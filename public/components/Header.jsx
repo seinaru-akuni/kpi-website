@@ -27,7 +27,7 @@ const Header = ({ currentView, navigateTo, username, handleLogout, isLoggedIn })
                     </a>
                     
                     {/* ДЕСКТОПНЕ МЕНЮ */}
-                    <div id="desktop-menu" className="desktop-flex-layout" style={{ display: 'flex', alignItems: 'center', justifyContent: isLoggedIn ? 'space-between' : 'flex-end', flexGrow: 1, marginLeft: '40px' }}>
+                    <div id="desktop-menu" className="desktop-flex-layout" style={{ alignItems: 'center', justifyContent: isLoggedIn ? 'space-between' : 'flex-end', flexGrow: 1, marginLeft: '40px' }}>
                         
                         {/* ПОКАЗУЄМО НАВІГАЦІЮ ТІЛЬКИ ЯКЩО ЗАЛОГІНЕНИЙ */}
                         {isLoggedIn && (

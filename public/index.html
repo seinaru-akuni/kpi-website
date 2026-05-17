@@ -18,17 +18,149 @@
 
         <script type="text/babel" src="components/Header.jsx"></script>
         <script type="text/babel" src="components/HomeView.jsx"></script>
-        <script type="text/babel" src="components/FeedView.jsx"></script>
+        <script type="text/babel" src="components/DashboardView.jsx"></script>
         <script type="text/babel" src="components/NewEntryView.jsx"></script>
         <script type="text/babel" src="components/AnalyticsView.jsx"></script>
         <script type="text/babel" src="components/ProfileView.jsx"></script>
 
-        <script type="text/babel" src="components/DashboardView.jsx"></script>
-
         <script type="text/babel">
+            const { useState, useEffect } = React;
+
+            const App = () => {
+                const [currentView, setCurrentView] = useState('home');
+                const [entries, setEntries] = useState([]);
+                const [loading, setLoading] = useState(true);
+                const [error, setError] = useState('');
+                const [username, setUsername] = useState('Користувач');
+                const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+                // Перевірка авторизації
+                const checkAuthAndLoadData = async () => {
+                    try {
+                        const response = await fetch('/api/me');
+                        const data = await response.json();
+
+                        if (data.loggedIn) {
+                            setIsLoggedIn(true);
+                            setUsername(data.username);
+                            await loadEntries(); 
+                        } else {
+                            setIsLoggedIn(false);
+                            setLoading(false);
+                        }
+                    } catch (err) {
+                        console.error("Помилка з'єднання з сервером", err);
+                        setIsLoggedIn(false);
+                        setLoading(false);
+                    }
+                };
+
+                // Завантаження карток (записів)
+                const loadEntries = async () => {
+                    setError('');
+                    try {
+                        const response = await fetch('/api/entries');
+                        if (!response.ok) throw new Error('Не вдалося завантажити дані');
+                        const data = await response.json();
+                        setEntries(data);
+                        if (data.length > 0) setUsername(data[0].user);
+                    } catch (err) {
+                        setError(err.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+
+                useEffect(() => {
+                    checkAuthAndLoadData();
+                }, []);
+
+                // Створення нового запису
+                const handleAddEntry = async (newEntryData) => {
+                    setLoading(true);
+                    try {
+                        const response = await fetch('/api/entries', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(newEntryData)
+                        });
+                        if (!response.ok) throw new Error('Помилка збереження запису');
+                        await loadEntries();
+                        setCurrentView('feed'); // 'feed' тепер викликає DashboardView
+                    } catch (err) {
+                        alert(err.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+
+                // Навігація
+                const navigateTo = (view) => {
+                    if (!isLoggedIn && view !== 'home') {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    setCurrentView(view);
+                };
+
+                // Вихід
+                const handleLogout = async (e) => {
+                    e.preventDefault();
+                    await fetch('/api/logout', { method: 'POST' });
+                    window.location.href = 'index.html';
+                };
+
+                // Екран завантаження
+                if (loading && entries.length === 0) {
+                    return (
+                        <div style={{ display: 'flex', height: '100vh', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <div className="loader-spinner"></div>
+                            <p style={{ marginTop: '15px', color: '#6200ee', fontWeight: 'bold' }}>Завантаження MindFlow...</p>
+                        </div>
+                    );
+                }
+
+                // ГОЛОВНИЙ РЕНДЕР
+                return (
+                    <div>
+                        <Header 
+                            currentView={currentView}
+                            navigateTo={navigateTo}
+                            username={username}
+                            handleLogout={handleLogout}
+                            isLoggedIn={isLoggedIn}
+                        />
+
+                        <main className="flex-container-column mg-2 clmp-xmg-2">
+                            {error && <div style={{color: 'red', padding: '10px', backgroundColor: '#fff'}}>{error}</div>}
+
+                            {currentView === 'home' && (
+                                <HomeView onNavigate={navigateTo} />
+                            )}
+
+                            {/* Замість FeedView тепер викликаємо DashboardView */}
+                            {isLoggedIn && currentView === 'feed' && (
+                                <DashboardView entries={entries} onNavigateToNew={() => setCurrentView('new')} />
+                            )}
+
+                            {isLoggedIn && currentView === 'new' && (
+                                <NewEntryView onSave={handleAddEntry} disabled={loading} />
+                            )}
+
+                            {isLoggedIn && currentView === 'analytics' && (
+                                <AnalyticsView entries={entries} />
+                            )}
+
+                            {isLoggedIn && currentView === 'profile' && (
+                                <ProfileView username={username} />
+                            )}
+                        </main>
+                    </div>
+                );
+            };
+
             const root = ReactDOM.createRoot(document.getElementById('react-dashboard-root'));
-            root.render(<DashboardApp />);
+            root.render(<App />);
         </script>
-        
     </body>
 </html>

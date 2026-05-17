@@ -68,9 +68,9 @@ header nav ul li a {
     cursor: pointer;
 }
 
-@media (max-width: 1310px) {
+@media (max-width: 1100px) {
     #desktop-menu {
-        display: none;
+        display: none !important;
     }
     
     #burger {
@@ -80,10 +80,10 @@ header nav ul li a {
     }
 
     #mobile-main-2-content{
-        display: block;
+        display: block !important;
     }
     #desktop-main-2-content{
-        display: none;
+        display: none !important;
     }
 
 }
