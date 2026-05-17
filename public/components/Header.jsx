@@ -1,8 +1,6 @@
-const Header = ({ currentView, navigateTo, username, handleLogout }) => {
-    // Стан для мобільного бургер-меню тепер живе виключно в хедері
+const Header = ({ currentView, navigateTo, username, handleLogout, isLoggedIn }) => {
     const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
-    // Зручна обгортка для переходу, яка заодно закриває бургер-меню
     const handleNavClick = (e, view) => {
         e.preventDefault();
         navigateTo(view);
@@ -11,15 +9,11 @@ const Header = ({ currentView, navigateTo, username, handleLogout }) => {
 
     return (
         <React.Fragment>
-            <style>{`
-                
-            `}</style>
-
             <header className="container-fluid bbr-1 brc-0 bgc-white" style={{height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 15px', position: 'relative'}}>
                 <div id="header-container" className="clmp-xmg-3" style={{width: '100%', maxWidth: '1200px', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                     
                     {/* ЛОГОТИП */}
-                    <a href="#" onClick={(e) => handleNavClick(e, 'feed')} className="clmp-rpg-1" style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', flexShrink: 0}}>
+                    <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="clmp-rpg-1" style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', flexShrink: 0}}>
                         <div className="logo inline-block" style={{marginRight: '8px', display: 'flex', alignItems: 'center'}}>
                             <svg width="40.00" height="40.00" viewBox="0.00 0.00 200.00 200.00" xmlns="http://www.w3.org/2000/svg">
                                 <g strokeLinecap="round" id="Layer_1_Copy_4">
@@ -33,61 +27,73 @@ const Header = ({ currentView, navigateTo, username, handleLogout }) => {
                     </a>
                     
                     {/* ДЕСКТОПНЕ МЕНЮ */}
-                    <div id="desktop-menu" className="desktop-flex-layout">
-                        <nav style={{display: 'flex', alignItems: 'center'}}>
-                            <ul className="mg-0 pg-0" style={{listStyle: 'none', display: 'flex', alignItems: 'center', gap: '20px'}}>
-                                <li>
-                                    <a className={`inline-block ${currentView === 'home' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'home')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>                                        <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                                        </svg>
-                                        <h4 style={{margin: 0}}>Головна</h4>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className={`inline-block ${currentView === 'feed' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'feed')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
-                                        <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
-                                        </svg>
-                                        <h4 style={{margin: 0}}>Дашборд</h4>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className={`inline-block ${currentView === 'new' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'new')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
-                                        <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-                                        <h4 style={{margin: 0}}>Новий запис</h4>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className={`inline-block ${currentView === 'analytics' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'analytics')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
-                                        <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                                        </svg>
-                                        <h4 style={{margin: 0}}>Аналітика</h4>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className={`inline-block ${currentView === 'profile' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'profile')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
-                                        <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                        </svg>
-                                        <h4 style={{margin: 0}}>Профіль</h4>
-                                    </a>
-                                </li>
-                            </ul>   
-                        </nav>
+                    <div id="desktop-menu" className="desktop-flex-layout" style={{ display: 'flex', alignItems: 'center', justifyContent: isLoggedIn ? 'space-between' : 'flex-end', flexGrow: 1, marginLeft: '40px' }}>
+                        
+                        {/* ПОКАЗУЄМО НАВІГАЦІЮ ТІЛЬКИ ЯКЩО ЗАЛОГІНЕНИЙ */}
+                        {isLoggedIn && (
+                            <nav style={{display: 'flex', alignItems: 'center'}}>
+                                <ul className="mg-0 pg-0" style={{listStyle: 'none', display: 'flex', flexWrap: 'nowrap', alignItems: 'center', gap: '20px', whiteSpace: 'nowrap'}}>
+                                    <li>
+                                        <a className={`inline-block ${currentView === 'home' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'home')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>                                        <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                            </svg>
+                                            <h4 style={{margin: 0}}>Головна</h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={`inline-block ${currentView === 'feed' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'feed')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
+                                            <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                                            </svg>
+                                            <h4 style={{margin: 0}}>Дашборд</h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={`inline-block ${currentView === 'new' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'new')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
+                                            <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                            <h4 style={{margin: 0}}>Новий запис</h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={`inline-block ${currentView === 'analytics' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'analytics')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
+                                            <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                                            </svg>
+                                            <h4 style={{margin: 0}}>Аналітика</h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={`inline-block ${currentView === 'profile' ? 'cl-prpl' : ''}`} href="#" onClick={(e) => handleNavClick(e, 'profile')} style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit'}}>
+                                            <svg width="20.00" height="20.00" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{marginRight: '6px'}}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                            </svg>
+                                            <h4 style={{margin: 0}}>Профіль</h4>
+                                        </a>
+                                    </li>
+                                </ul>   
+                            </nav>
+                        )}
 
-                        {/* БЛОК АВТОРИЗАЦІЇ ДЕСКТОП */}
-                        <div id="auth-desktop" style={{display: 'flex', alignItems: 'center', flexShrink: 0, marginLeft: '20px'}}>
-                            <span style={{color: 'gray', marginRight: '15px', whiteSpace: 'nowrap'}}>Вітаємо, <b>{username}</b>!</span>
-                            <button onClick={handleLogout} className="btn ypg-8px clmp-xpg-2 xmg-8px white-btn br-radius-16px" style={{color: '#c62828', border: '1px solid #c62828', cursor: 'pointer', whiteSpace: 'nowrap'}}>
-                                Вихід
-                            </button>
-                        </div>
+                        {/* БЛОК АВТОРИЗАЦІЇ ДЕСКТОП: ЗАЛЕЖИТЬ ВІД СТАТУСУ */}
+                        {isLoggedIn ? (
+                            <div id="auth-desktop" style={{display: 'flex', alignItems: 'center', flexShrink: 0, marginLeft: '20px', whiteSpace: 'nowrap'}}>
+                                <span style={{color: 'gray', marginRight: '15px'}}>Вітаємо, <b>{username}</b>!</span>
+                                <button onClick={handleLogout} className="btn ypg-8px clmp-xpg-2 xmg-8px white-btn br-radius-16px" style={{color: '#c62828', border: '1px solid #c62828', cursor: 'pointer', whiteSpace: 'nowrap'}}>
+                                    Вихід
+                                </button>
+                            </div>
+                        ) : (
+                            <div id="auth-desktop" style={{display: 'flex', alignItems: 'center', flexShrink: 0, marginLeft: '20px', whiteSpace: 'nowrap'}}>
+                                <a href="login.html" className="btn ypg-8px clmp-xpg-2 xmg-8px white-btn br-radius-16px" style={{textDecoration: 'none'}}>Вхід</a>
+                                <a href="register.html" className="btn ypg-8px clmp-xpg-3 xmg-8px prpl-btn br-radius-16px" style={{textDecoration: 'none'}}>Реєстрація</a>
+                            </div>
+                        )}
+
                     </div>
 
-                    {/* === ОБГОРТКА ДЛЯ БУРГЕРА === */}
+                    {/* === ОБГОРТКА ДЛЯ БУРГЕРА (Для мобільних пристроїв) === */}
                     <div className="flex-container-row y-center" style={{ marginLeft: 'auto', height: '100%' }}>
                         <div id="burger" 
                                 className={isBurgerOpen ? 'active' : ''} 
@@ -112,48 +118,58 @@ const Header = ({ currentView, navigateTo, username, handleLogout }) => {
                                         borderBottomLeftRadius: '16px',
                                     }}>
                                     
-                                <div className="main-tabs bgc-white">
-                                    <a href="#" onClick={(e) => handleNavClick(e, 'home')} style={{color: currentView === 'home' ? '#6200ee' : 'inherit'}}>
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                                        </svg>
-                                        <h4 className="lmg-8px ymg-0">Головна</h4>
-                                    </a>
-                                    <a href="#" onClick={(e) => handleNavClick(e, 'feed')} style={{color: currentView === 'feed' ? '#6200ee' : 'inherit'}}>
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
-                                        </svg>
-                                        <h4 className="lmg-8px ymg-0">Дашборд</h4>
-                                    </a>
-                                    <a href="#" onClick={(e) => handleNavClick(e, 'new')} style={{color: currentView === 'new' ? '#6200ee' : 'inherit'}}>
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-                                        <h4 className="lmg-8px ymg-0">Новий запис</h4>
-                                    </a>
-                                    <a href="#" onClick={(e) => handleNavClick(e, 'analytics')} style={{color: currentView === 'analytics' ? '#6200ee' : 'inherit'}}>
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                                        </svg>
-                                        <h4 className="lmg-8px ymg-0">Аналітика</h4>
-                                    </a>
-                                    <a href="#" 
-                                        onClick={(e) => handleNavClick(e, 'profile')} 
-                                        style={{color: currentView === 'profile' ? '#6200ee' : 'inherit'}}>
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                        </svg>
-                                        <h4 className="lmg-8px ymg-0">Профіль</h4>
-                                    </a>
-                                </div>
+                                {/* ПОКАЗУЄМО НАВІГАЦІЮ ТІЛЬКИ ЯКЩО ЗАЛОГІНЕНИЙ */}
+                                {isLoggedIn && (
+                                    <div className="main-tabs bgc-white">
+                                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} style={{color: currentView === 'home' ? '#6200ee' : 'inherit'}}>
+                                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                            </svg>
+                                            <h4 className="lmg-8px ymg-0">Головна</h4>
+                                        </a>
+                                        <a href="#" onClick={(e) => handleNavClick(e, 'feed')} style={{color: currentView === 'feed' ? '#6200ee' : 'inherit'}}>
+                                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                                            </svg>
+                                            <h4 className="lmg-8px ymg-0">Дашборд</h4>
+                                        </a>
+                                        <a href="#" onClick={(e) => handleNavClick(e, 'new')} style={{color: currentView === 'new' ? '#6200ee' : 'inherit'}}>
+                                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                            <h4 className="lmg-8px ymg-0">Новий запис</h4>
+                                        </a>
+                                        <a href="#" onClick={(e) => handleNavClick(e, 'analytics')} style={{color: currentView === 'analytics' ? '#6200ee' : 'inherit'}}>
+                                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                                            </svg>
+                                            <h4 className="lmg-8px ymg-0">Аналітика</h4>
+                                        </a>
+                                        <a href="#" 
+                                            onClick={(e) => handleNavClick(e, 'profile')} 
+                                            style={{color: currentView === 'profile' ? '#6200ee' : 'inherit'}}>
+                                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lmg-16px">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                            </svg>
+                                            <h4 className="lmg-8px ymg-0">Профіль</h4>
+                                        </a>
+                                    </div>
+                                )}
                                 
                                 <div className="login-tabs bgc-white tmg-8px">
-                                    <div className="pg-16px flex-container-column y-center gap-10px" style={{gap: '10px'}}>
-                                        <span style={{color: 'gray'}}>Вітаємо, <b className="white-space-nowrap">{username}</b>!</span>
-                                        <button onClick={handleLogout} className="w100 prpl-btn ypg-8px br-radius-16px">
-                                            Вихід
-                                        </button>
-                                    </div>
+                                    {isLoggedIn ? (
+                                        <div className="pg-16px flex-container-column y-center gap-10px" style={{gap: '10px'}}>
+                                            <span style={{color: 'gray'}}>Вітаємо, <b className="white-space-nowrap">{username}</b>!</span>
+                                            <button onClick={handleLogout} className="w100 prpl-btn ypg-8px br-radius-16px">
+                                                Вихід
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="pg-16px flex-container-column y-center gap-10px" style={{gap: '10px'}}>
+                                            <a href="login.html" className="w100 white-btn ypg-8px br-radius-16px text-al-center" style={{textDecoration: 'none'}}>Вхід</a>
+                                            <a href="register.html" className="w100 prpl-btn ypg-8px br-radius-16px text-al-center" style={{textDecoration: 'none'}}>Реєстрація</a>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

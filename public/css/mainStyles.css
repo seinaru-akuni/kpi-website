@@ -198,3 +198,24 @@ table.analytics-table th {
     height: 40px;
     animation: spin 1s linear infinite;
 }
+
+.desktop-flex-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin-left: 30px;
+}
+
+/* Фон та відступи для мобільного меню */
+#burger-dropdown .main-tabs,
+#burger-dropdown .login-tabs {
+    background-color: white;
+}
+#burger-dropdown .main-tabs a h4 {
+    margin: 0;
+    margin-left: 10px;
+}
+#burger-dropdown .main-tabs a svg {
+    margin-left: 15px;
+}
